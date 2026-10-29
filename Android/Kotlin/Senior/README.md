@@ -1,4 +1,4 @@
-﻿# Kotlin 专家收束（Senior / Tech Lead 向）
+# Kotlin 专家收束（Senior / Tech Lead 向）
 
 ## 一、KMP 面试答法：expect / actual 与共享边界
 
@@ -35,19 +35,18 @@ expect/actual 把平台差异收敛到**编译期可检查的声明点**，避�
 
 ---
 
-## 二、协程统一模型：服务端与 Android 一句话深度
+## 二、协程统一模型：Android 与共享层一句话深度
 
 ### 问题
 
-协程在 Android 与服务端（Ktor/Spring 等）是否同一模型？如何向团队解释统一性？
+协程模型在 Android 与 Kotlin 共享数据层是否同一套？如何向团队解释统一性？
 
 ### 机制级答案
 
-- **同一运行时核心**：CPS/状态机、CoroutineContext、Dispatcher、结构化并发、Flow——**平台无关**（kotlinx-coroutines）；Android 的 viewModelScope 与服务端的请求作用域只是**宿主生命周期不同**。
-- **Dispatcher 差异**：Android 主线程 Main + IO/Default 池；服务端常是 Netty/Ktor 的事件循环或虚拟线程宿主——**模型统一，池策略按宿主调**。
-- **Flow 统一**：服务端推送/流式响应与 Android 状态流同一组合子——团队共享操作符心智与测试工具（虚拟时间）。
-- **互操作层**：Ktor 协程挂起 API ↔ Android 客户端协程——端到端"挂起到底"，减少回调适配层；注意取消与超时要端到端贯通（HTTP cancel 传播）。
-- **叙事一句话**：协程是 Kotlin 的**结构化并发运行时**，生命周期由宿主（UI/请求/任务）注入 Context，业务代码不绑 Android API——这正是 KMP 共享数据层的前提。
+- **同一运行时核心**：CPS/状态机、CoroutineContext、Dispatcher、结构化并发、Flow——**平台无关**（kotlinx-coroutines）；Android 的 viewModelScope 只是**宿主生命周期不同**，共享层的仓库协程同样挂在自有 Scope 上。
+- **Dispatcher 差异**：Android 主线程 Main + IO/Default 池；共享层/测试里按宿主注入 Dispatcher——**模型统一，池策略按宿主调**。
+- **Flow 统一**：UI 状态流与仓库层数据流同一组合子——团队共享操作符心智与测试工具（虚拟时间）。
+- **叙事一句话**：协程是 Kotlin 的**结构化并发运行时**，生命周期由宿主（UI/任务）注入 Context，业务代码不绑 Android API——这正是 KMP 共享数据层的前提。
 
 ### 【为什么这样设计】
 
@@ -56,8 +55,8 @@ expect/actual 把平台差异收敛到**编译期可检查的声明点**，避�
 ### 【面试官视角：考察点 / 加分 / 减分】
 
 - 考察点：同一核心、宿主 scope、取消贯通。
-- 加分：提到服务端背压/超时与 Flow/Channel 对应；团队培训路径。
-- 减分：说"协程是 Android 特性"；忽视服务端线程模型差异只背名词。
+- 加分：提到 Flow/Channel 背压与超时的对应；团队培训路径。
+- 减分：说"协程是 Android 特性"；只背名词不讲结构化并发与取消语义。
 
 ### 【追问链】
 

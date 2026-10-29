@@ -76,7 +76,7 @@ void process(Optional<String> input) { ... }
 
 原因：
 
-- 字段/参数的"可空"本就是 Java 常态（`null` 或注解 `@Nullable`）；把 Optional 放进字段会污染序列化（JSON 库对 Optional 支持不一）、equals/hashCode、框架注入（Spring 字段注入对 Optional 的支持语义模糊）。
+- 字段/参数的"可空"本就是 Java 常态（`null` 或注解 `@Nullable`）；把 Optional 放进字段会污染序列化（JSON 库对 Optional 支持不一）、equals/hashCode，以及与依赖注入/模板框架的边界语义。
 - **Optional 的设计场景是"方法返回值"**：告诉调用方"可能没有，必须处理"。
 - 约定：参数用普通类型（必要时 `@Nullable`），返回值用 `Optional` 表达缺失。
 
