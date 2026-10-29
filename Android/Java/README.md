@@ -1,27 +1,22 @@
 ﻿# Java（Android 工程师向）
 
-> **定位**：Android 应用跑在 JVM/ART 语义之上，Java 是读源码、排内存/并发问题、理解字节码与类加载的语言地基。本目录**不按独立 Java 后端栈叙述**，一切以「Android 工程师需要讲清楚什么」为取舍：语言与集合 → 并发与内存 → 与 Android 运行时（ART/dex/ClassLoader）对齐的工程能力。
+* 谈谈final，finally，finalize的区别？
 
-每题深度标准与 [Android Senior](../Senior) 一致：机制级答案 → 为什么这样设计 → 面试官视角 → 追问链（高阶树）。
+  > **final** 如果一个类被声明为final，意味着他不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为 abstract，又被声明为final。将变量或方法声明为final，可以保证他们在使用中不被改变。被声明为final 的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。被声明为final的方法也同样只能使用，不能重载。
+  >
+  > **finally** 在异常处理时，提供finally块来执行任何的清除操作。如果抛出一个异常，那么相匹配的catch子句就会执行，如果存在finally块，控制就会进入finally块执行代码。
+  >
+  > **finalize** Java技术允许使用finalize()在垃圾收集器将对象从内存中清除之前做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的。它实在Object类中定义的，因此所有的类都继承了它，子类覆盖finalize()以整理系统资源或执行其他清理工作。finalize()实在垃圾收集器删除对象之前对这个对象调用的。
 
-# 在 Android 面试中的用法
+* Anonymous Inner Class (匿名内部类) 是否可以 extends (继承) 其他类，是否可以 implements (实现) interface (API)？
 
-- **应用层追问**：HashMap 与线程安全、synchronized/volatile、对象分配与 GC——面试官常从业务代码挖到语言与运行时。
-- **排查叙事**：内存泄漏、卡顿、崩溃的根因常落在 Java 对象图、线程模型与 GC 行为上。
-- **与 Kotlin 对照**：协程建模在 JVM 线程与内存模型之上；互操作坑（空平台类型、默认参数）见 [Kotlin](../Kotlin)。
+  > 匿名内部类是没有类名的内部类。不能继承其他类，但一个内部类可以作为一个接口，有另一个内部类实现。
 
-# 深度复习
+* Static Nested Class (静态嵌套类，一般是C++的说法) 和 Inner Class (内部类) 的不同？
 
-### [Language](Language) —— 语法、面向对象、集合、算法、Java 8+（Lambda/Stream）
-
-### [JVM](JVM) —— 类文件、字节码、加载链接初始化（对照 ART 时说语义差异）
-
-### [Senior](Senior) —— 并发 AQS/线程池、GC 与泄漏排查、缓存一致与幂等（Android 侧同构问题）
-
-### [Frameworks](Frameworks) —— 常用框架概念（面试偶发）
-
-### [Tools](Tools) —— 诊断工具链（jstack 等，对照 Android Profiler）
-
-# 发展简史（一句话）
-
-1995 年诞生 → 2004 Java 5 里程碑 → 2014 Java 8（Lambda/Stream，Android 语言现代化对应）→ Oracle 时代与 OpenJDK 多发行版。细节不必背年表，面试重在语言版本与 Android API/语言特性对应关系。
+  > Java内部类与C++嵌套类最大的不同就在于是否有指向外部的引用。
+  >
+  > 静态内部类：
+  >
+  > * 创建一个静态内部类对象，不需要一个外部类对象
+  > * 静态内部类对象不能访问外部类对象
