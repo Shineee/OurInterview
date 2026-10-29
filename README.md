@@ -1,5 +1,7 @@
-# OurInterview
+﻿# OurInterview
 本项目以另外的角度来看待面试题，避免题海战术，把面试题中的点融汇到技术中，提倡把技术学精、学通，以不变胜万变。
+
+**全书以 Android 工程师求职 / 资深晋升为主线**：Java、Kotlin 不作为独立技术栈叙述，而是 Android 大前提下的语言与运行时地基。
 
 # Interview Introduction
 
@@ -25,11 +27,18 @@
 
 # Vocation
 
-### [Android](Android)
+### [Android](Android) —— 技术主线（含 Java / Kotlin 语言地基）
 
-### [Java](Java)
+### [HR](HR) —— 非技术面
 
-### [HR](HR)
+# 目录导读（Android 大前提）
+
+- **应用层与框架**：[技术面试](Android/TechnicalInterview)、[技术笔试](Android/TechnicalWrittenExamination) —— Activity/四大组件、异步、View、架构、三方库、运行时与 Binder。
+- **语言与运行时地基（在 Android 语境下叙述）**：
+  - [Java（Android 工程师向）](Android/Java) —— 语言、集合、算法、JVM 与 ART 相关的工程化深水区；[Java 高阶](Android/Java/Senior)（并发、GC/泄漏排查、缓存与幂等）
+  - [Kotlin（Android 一等公民）](Android/Kotlin) —— 语言深挖、协程/Flow、Android 实战、KMP 与工程治理
+- **高阶专题（资深 / 专家 / 架构师）**：[Android Senior](Android/Senior) —— 系统设计、稳定性、性能、架构演进、跨端。全树统一「机制级答案 → 设计动机 → 面试官视角 → 追问链」。
+- **非技术面**：[HR 面试](HR/Interview) —— 考察点鉴别、回答结构、薪资谈判与反问。
 
 # Version
 
