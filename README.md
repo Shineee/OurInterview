@@ -1,4 +1,4 @@
-﻿# OurInterview
+# OurInterview
 
 本项目以另外的角度来看待面试题，避免题海战术，把面试题中的点融汇到技术中，提倡把技术学精、学通，以不变胜万变。
 
@@ -58,7 +58,7 @@ OurInterview/
 
 # Version
 
-1.3.163.20161128_release
+11.10.164.20261029_release
 
 # License
 
